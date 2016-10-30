@@ -35,10 +35,10 @@ public class MagicSystem : MonoBehaviour {
 	
 	// Timer that starts the recharging after a cooldown.
 	private IEnumerator StartRechargeTimer()
-    {
+    	{
 		yield return new WaitForSeconds(rechargeCooldown);
 		StartCoroutine("RechargeMagic");
-    }
+    	}
 	
 	// Recursive function that handles the recharging.
 	private IEnumerator RechargeMagic()
