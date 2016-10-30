@@ -10,7 +10,7 @@ using System.Collections;
 public class MagicSystem : MonoBehaviour {
 
 	// Total amount of available magic.
-    public float magic = 0;
+	public float magic = 0;
 	
 	// Maximum amount of magic.
 	public float maxMagic = 100;
@@ -34,32 +34,32 @@ public class MagicSystem : MonoBehaviour {
 	}
 	
 	// Timer that starts the recharging after a cooldown.
-    private IEnumerator StartRechargeTimer()
+	private IEnumerator StartRechargeTimer()
     {
-        yield return new WaitForSeconds(rechargeCooldown);
-        StartCoroutine("RechargeMagic");
+		yield return new WaitForSeconds(rechargeCooldown);
+		StartCoroutine("RechargeMagic");
     }
 	
 	// Recursive function that handles the recharging.
-    private IEnumerator RechargeMagic()
-    {
-        yield return new WaitForSeconds(magicRechargeStep);
-        calculateMagic(magicRechargeRate);
-		
+	private IEnumerator RechargeMagic()
+	{
+		yield return new WaitForSeconds(magicRechargeStep);
+		calculateMagic(magicRechargeRate);
+	
 		// Keep recharging if magic is not maxed.
 		if (magic != maxMagic) 
 		{
 			StartCoroutine("RechargeMagic");
 		}
-    }
+	}
 
-    // Handles increasing/decreasing magic. It's a public function so it can be called from other scripts.
-    public void calculateMagic(float amount)
-    {
+	// Handles increasing/decreasing magic. It's a public function so it can be called from other scripts.
+	public void calculateMagic(float amount)
+	{
 		// Change magic value and make sure it stays within defined bounds.
-        magic += amount;
-        Mathf.Clamp(magic, 0, maxMagic);
-		
+		magic += amount;
+		Mathf.Clamp(magic, 0, maxMagic);
+	
 		// Stop recharging only if magic decreases.
 		if (amount < 0)
 		{
@@ -67,5 +67,5 @@ public class MagicSystem : MonoBehaviour {
 			StopAllCoroutines();
 			StartCoroutine("StartRechargeTimer");
 		}	
-    }
+	}
 }
